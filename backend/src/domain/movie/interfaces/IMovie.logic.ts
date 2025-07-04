@@ -7,4 +7,5 @@ export interface IMovieLogic{
     delete(id: string): Promise<void>;
 
     getAll(): Promise<Movie[]>;
+    upload(filePath: string): Promise<void>;
 }

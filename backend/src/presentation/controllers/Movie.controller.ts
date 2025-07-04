@@ -74,9 +74,9 @@ export class MovieController {
             const file = (req as Request & { file: MulterFile }).file;
             if (!file) return res.status(400).json({ error: 'No file uploaded' });
 
-            // await this.movieLogic.create(body.year, body.title, body.studios, body.producers, body.winner);
+            await this.movieLogic.upload(file.path);
 
-            return res.status(201).json('File path: ' + file.path);
+            return res.status(201).json('ok');
         } catch (error) {
             return next(error);
         }

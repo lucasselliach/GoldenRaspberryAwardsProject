@@ -61,4 +61,20 @@ export class MovieLogic implements IMovieLogic {
     public async getAll(): Promise<Movie[]> {
         return await this.movieRepository.getAll();
     }
+
+    public async upload(filePath: string): Promise<void> {
+        // const movie: Movie = Movie.Create({
+        //     year: year,
+        //     title: title,
+        //     studios: studios,
+        //     producers: producers,
+        //     winner: winner
+        // });
+
+        // if(this.movieValidation.isValid(movie)){
+        //     await this.movieRepository.create(movie);
+        // }else{
+        //     throw new DomainError('Filme não é valido');
+        // }
+    }
 }
