@@ -5,6 +5,7 @@ import { IMovieValidation } from "../domain/movie/interfaces/IMovie.validation";
 import { IMovieRepository } from "../domain/movie/interfaces/IMovie.repository";
 import { MovieValidation } from "../domain/movie/validation/Movie.validation";
 import { MovieRepository } from "../infra/repositories/Movie.repository";
+import { DomainError } from "../infra/core/DomainError";
 
 @Service()
 export class MovieLogic implements IMovieLogic {
@@ -17,71 +18,47 @@ export class MovieLogic implements IMovieLogic {
     }
 
     public async create(year: number, title: string, studios: string, producers: string, winner: boolean): Promise<void> {
-        try {
-            const movie: Movie = Movie.Create({
-                year: year,
-                title: title,
-                studios: studios,
-                producers: producers,
-                winner: winner
-            });
+        const movie: Movie = Movie.Create({
+            year: year,
+            title: title,
+            studios: studios,
+            producers: producers,
+            winner: winner
+        });
 
-            if(this.movieValidation.isValid(movie)){
-                await this.movieRepository.create(movie);
-            }else{
-                throw new Error('Filme não é valido');
-            }
-        } catch (error) {
-            console.log(error);
-            throw(error);
+        if(this.movieValidation.isValid(movie)){
+            await this.movieRepository.create(movie);
+        }else{
+            throw new DomainError('Filme não é valido');
         }
     }
 
     public async read(id: string): Promise<Movie | any> {
-        try {
-            return await this.movieRepository.read(id);
-        } catch (error) {
-            console.log(error);
-            throw(error)
-        }
+        return await this.movieRepository.read(id);
     }
 
     public async update(id: string, year: number, title: string, studios: string, producers: string, winner: boolean): Promise<void> {
-        try {
-            const movie: Movie = Movie.Create({
-                year: year,
-                title: title,
-                studios: studios,
-                producers: producers,
-                winner: winner
-            });
 
-            if(this.movieValidation.isValid(movie)){
-                await this.movieRepository.update(id, movie);
-            }else{
-                throw new Error('Filme não é valido');
-            }
-        } catch (error) {
-            console.log(error);
-            throw(error);
+        const movie: Movie = Movie.Create({
+            year: year,
+            title: title,
+            studios: studios,
+            producers: producers,
+            winner: winner
+        });
+
+        if(this.movieValidation.isValid(movie)){
+            await this.movieRepository.update(id, movie);
+        }else{
+            throw new DomainError('Filme não é valido');
         }
     }
 
     public async delete(id: string): Promise<void> {
-        try {
-            await this.movieRepository.delete(id);
-        } catch (error) {
-            console.log(error);
-            throw(error)
-        }
+        await this.movieRepository.delete(id);
     }
 
     public async getAll(): Promise<Movie[]> {
-        try {
-            return await this.movieRepository.getAll();
-        } catch (error) {
-            console.log(error);
-            throw(error)
-        }
+        return await this.movieRepository.getAll();
     }
 }

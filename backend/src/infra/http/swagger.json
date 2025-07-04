@@ -143,51 +143,60 @@
                 "_id": {
                      "type": "string"
                 },
-                "name": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                },
-                "value": {
+                "year": {
                     "type": "number"
                 },
-                "type": {
+                "title": {
                     "type": "string"
+                },
+                "studios": {
+                    "type": "string"
+                },
+                "producers": {
+                    "type": "string"
+                },
+                "winner": {
+                    "type": "boolean"
                 }
             }
         },
         "MovieCreate": {
             "type": "object",
             "properties": {
-               "name": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                },
-                "value": {
+               "year": {
                     "type": "number"
                 },
-                "type": {
+                "title": {
                     "type": "string"
+                },
+                "studios": {
+                    "type": "string"
+                },
+                "producers": {
+                    "type": "string"
+                },
+                "winner": {
+                    "type": "boolean"
                 }
             }
         },
         "MovieEdit": {
             "type": "object",
             "properties": {
-               "name": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                },
-                "value": {
+               "year": {
                     "type": "number"
                 },
-                "type": {
+                "title": {
                     "type": "string"
+                },
+                "studios": {
+                    "type": "string"
+                },
+                "producers": {
+                    "type": "string"
+                },
+                "winner": {
+                    "type": "boolean"
                 }
             }
         }

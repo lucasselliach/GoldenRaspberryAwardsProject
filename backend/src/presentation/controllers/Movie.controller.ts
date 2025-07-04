@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { Service } from "typedi";
 import { IMovieLogic } from "../../domain/movie/interfaces/IMovie.logic";
 import { MovieLogic } from "../../application/Movie.logic";
+import { File as MulterFile } from 'multer';
 
 @Service()
 export class MovieController {
@@ -63,6 +64,19 @@ export class MovieController {
             const response = await this.movieLogic.getAll();
 
             return res.status(response ? 200 : 204).json(response);
+        } catch (error) {
+            return next(error);
+        }
+    }
+
+    public async upload(req: Request, res: Response, next: NextFunction) {
+        try {
+            const file = (req as Request & { file: MulterFile }).file;
+            if (!file) return res.status(400).json({ error: 'No file uploaded' });
+
+            // await this.movieLogic.create(body.year, body.title, body.studios, body.producers, body.winner);
+
+            return res.status(201).json('File path: ' + file.path);
         } catch (error) {
             return next(error);
         }
