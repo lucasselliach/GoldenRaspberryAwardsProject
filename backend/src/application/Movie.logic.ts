@@ -1,6 +1,7 @@
 import { Service } from "typedi";
 import { parse } from "csv-parse";
 import { Movie } from "../domain/movie/Movie";
+import { MoviePrizeBracket } from "../domain/movie/MoviePrizeBracket";
 import { IMovieLogic } from "../domain/movie/interfaces/IMovie.logic";
 import { IMovieValidation } from "../domain/movie/interfaces/IMovie.validation";
 import { IMovieRepository } from "../domain/movie/interfaces/IMovie.repository";
@@ -86,5 +87,11 @@ export class MovieLogic implements IMovieLogic {
                 throw new DomainError(`Filme ${movie.title} não é valido. Verifique os dados.`);
             }
         }
+    }
+
+    public async getPrizeBracket(): Promise<MoviePrizeBracket> {
+        const movies = await this.movieRepository.getAll();
+        
+        return MoviePrizeBracket.Create(movies);
     }
 }

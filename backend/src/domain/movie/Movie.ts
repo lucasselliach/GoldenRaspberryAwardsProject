@@ -1,4 +1,4 @@
-import { Entity } from "../../infra/core/Entity";
+import { Entity } from "../core/Entity";
 
 export interface IMovieProps {
     year: number;

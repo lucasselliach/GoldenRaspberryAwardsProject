@@ -27,4 +27,8 @@ router.route('/movies/:id')
 router.route('/movies/uploadcsv')
     .post(upload.single('filecsv'), (req: Request, res: Response, next: NextFunction) => { movieController.upload(req, res, next) });
 
+
+router.route('/prizebracket')
+    .get((req: Request, res: Response, next: NextFunction) => { movieController.getPrizeBracket(req, res, next) })
+
 export { router as MovieRouter };

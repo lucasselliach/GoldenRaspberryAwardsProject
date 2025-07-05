@@ -81,4 +81,14 @@ export class MovieController {
             return next(error);
         }
     }
+
+    public async getPrizeBracket(req: Request, res: Response, next: NextFunction) {
+        try {
+            const response = await this.movieLogic.getPrizeBracket();
+
+            return res.status(response ? 200 : 204).json(response);
+        } catch (error) {
+            return next(error);
+        }
+    }
 }
