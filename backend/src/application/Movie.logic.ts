@@ -1,4 +1,5 @@
 import { Service } from "typedi";
+import { parse } from "csv-parse";
 import { Movie } from "../domain/movie/Movie";
 import { IMovieLogic } from "../domain/movie/interfaces/IMovie.logic";
 import { IMovieValidation } from "../domain/movie/interfaces/IMovie.validation";
@@ -6,6 +7,8 @@ import { IMovieRepository } from "../domain/movie/interfaces/IMovie.repository";
 import { MovieValidation } from "../domain/movie/validation/Movie.validation";
 import { MovieRepository } from "../infra/repositories/Movie.repository";
 import { DomainError } from "../infra/core/DomainError";
+
+import fs from 'fs';
 
 @Service()
 export class MovieLogic implements IMovieLogic {
@@ -63,18 +66,25 @@ export class MovieLogic implements IMovieLogic {
     }
 
     public async upload(filePath: string): Promise<void> {
-        // const movie: Movie = Movie.Create({
-        //     year: year,
-        //     title: title,
-        //     studios: studios,
-        //     producers: producers,
-        //     winner: winner
-        // });
+        
+        const parser = fs.createReadStream(filePath).pipe(parse({ columns: true, trim: true }));
 
-        // if(this.movieValidation.isValid(movie)){
-        //     await this.movieRepository.create(movie);
-        // }else{
-        //     throw new DomainError('Filme não é valido');
-        // }
+        for await (const row of parser) {
+            console.log(row);
+            
+            const movie: Movie = Movie.Create({
+                year: Number(row.year),
+                title: row.title,
+                studios: row.studios,
+                producers: row.producers,
+                winner: row.winner?.toLowerCase() === "yes"
+            });
+
+            if (this.movieValidation.isValid(movie)) {
+                await this.movieRepository.create(movie);
+            } else {
+                throw new DomainError(`Filme ${movie.title} não é valido. Verifique os dados.`);
+            }
+        }
     }
 }

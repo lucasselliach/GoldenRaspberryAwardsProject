@@ -134,6 +134,28 @@
                     }
                 }
             }
+        },
+        "/movies/uploadcsv" : {
+            "post" : {
+                "summary" : "Upload a CSV file with movies",
+                "description": "Upload a CSV file with movies",
+                "produces": ["application/json"],
+                "consumes": ["multipart/form-data"],
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "file",
+                        "description": "CSV file with movies",
+                        "required": true,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation"
+                    }
+                }
+            }
         }
     }, 
     "definitions": {
