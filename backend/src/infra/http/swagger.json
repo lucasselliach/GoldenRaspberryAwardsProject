@@ -12,15 +12,19 @@
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         }
     },
-    "schemes": ["http"],
+    "schemes": [
+        "http"
+    ],
     "host": "localhost:8000",
     "basePath": "/v1",
-    "paths" : {
-        "/movies" : {
-            "get" : {
-                "summary" : "Get all the movies",
+    "paths": {
+        "/movies": {
+            "get": {
+                "summary": "Get all the movies",
                 "description": "Get all the movies",
-                "produces": ["application/json"],
+                "produces": [
+                    "application/json"
+                ],
                 "parameters": [],
                 "responses": {
                     "200": {
@@ -34,11 +38,15 @@
                     }
                 }
             },
-            "post" : {
-                "summary" : "Save a new movie",
+            "post": {
+                "summary": "Save a new movie",
                 "description": "Save a new movie",
-                "produces": ["application/json"],
-                "consumes": ["application/json"],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
                 "parameters": [
                     {
                         "in": "body",
@@ -58,11 +66,13 @@
                 }
             }
         },
-        "/movies/{id}" : {
-            "get" : {
-                "summary" : "Get a movie",
+        "/movies/{id}": {
+            "get": {
+                "summary": "Get a movie",
                 "description": "Get a movie",
-                "produces": ["application/json"],
+                "produces": [
+                    "application/json"
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -84,11 +94,15 @@
                     }
                 }
             },
-            "put" : {
-                "summary" : "Edit a movie",
+            "put": {
+                "summary": "Edit a movie",
                 "description": "Edit a movie",
-                "produces": ["application/json"],
-                "consumes": ["application/json"],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -114,11 +128,15 @@
                     }
                 }
             },
-            "delete" : {
-                "summary" : "Delete a movie",
+            "delete": {
+                "summary": "Delete a movie",
                 "description": "Delete a movie",
-                "produces": ["application/json"],
-                "consumes": ["application/json"],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -135,12 +153,16 @@
                 }
             }
         },
-        "/movies/uploadcsv" : {
-            "post" : {
-                "summary" : "Upload a CSV file with movies",
+        "/movies/uploadcsv": {
+            "post": {
+                "summary": "Upload a CSV file with movies",
                 "description": "Upload a CSV file with movies",
-                "produces": ["application/json"],
-                "consumes": ["multipart/form-data"],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "multipart/form-data"
+                ],
                 "parameters": [
                     {
                         "in": "formData",
@@ -156,14 +178,35 @@
                     }
                 }
             }
+        },
+        "/prizebracket": {
+            "get": {
+                "summary": "Get prize bracket",
+                "description": "Returns the prize bracket information",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/MoviePrizeBracketResponse"
+                            }
+                        }
+                    }
+                }
+            }
         }
-    }, 
+    },
     "definitions": {
         "MoviesResponse": {
             "type": "object",
             "properties": {
-                "_id": {
-                     "type": "string"
+                "id": {
+                    "type": "string"
                 },
                 "year": {
                     "type": "number"
@@ -185,7 +228,7 @@
         "MovieCreate": {
             "type": "object",
             "properties": {
-               "year": {
+                "year": {
                     "type": "number"
                 },
                 "title": {
@@ -205,7 +248,7 @@
         "MovieEdit": {
             "type": "object",
             "properties": {
-               "year": {
+                "year": {
                     "type": "number"
                 },
                 "title": {
@@ -219,6 +262,43 @@
                 },
                 "winner": {
                     "type": "boolean"
+                }
+            }
+        },
+        "MoviePrizeBracketResponse": {
+            "type": "object",
+            "properties": {
+                "min": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MoviePrizeBracketItemResponse"
+                    }
+                },
+                "max": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MoviePrizeBracketItemResponse"
+                    }
+                }
+            }
+        },
+        "MoviePrizeBracketItemResponse": {
+            "type": "object",
+            "properties": {
+                "producer": {
+                    "type": "string"
+                },
+                "interval": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "previousWin": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "followingWin": {
+                    "type": "integer",
+                    "format": "int32"
                 }
             }
         }

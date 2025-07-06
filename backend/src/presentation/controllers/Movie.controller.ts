@@ -1,8 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 import { Service } from "typedi";
-import { IMovieLogic } from "../../domain/movie/interfaces/IMovie.logic";
-import { MovieLogic } from "../../application/Movie.logic";
 import { File as MulterFile } from 'multer';
+import { MovieLogic } from "../../application/Movie.logic";
+import { IMovieLogic } from "../../domain/movie/interfaces/IMovie.logic";
+import { IMoviePrizeBracketResponse } from './interfaces/IPrizeBracketResponse';
+import { IMovieResponse } from './interfaces/IMovieResponse';
 
 @Service()
 export class MovieController {
@@ -26,7 +28,19 @@ export class MovieController {
     public async read(req: Request, res: Response, next: NextFunction) {
         try {
             const { id } = req.params;
-            const response = await this.movieLogic.read(id);
+            const movie = await this.movieLogic.read(id);
+
+            if (!movie) {
+                return res.status(204).json('No movie found');
+            }
+            const response: IMovieResponse = {
+                id: movie.id,
+                year: movie.year,
+                title: movie.title,
+                studios: movie.studios,
+                producers: movie.producers,
+                winner: movie.winner
+            };
 
             return res.status(response ? 200 : 204).json(response);
         } catch (error) {
@@ -61,7 +75,18 @@ export class MovieController {
 
     public async getAll(req: Request, res: Response, next: NextFunction) {
         try {
-            const response = await this.movieLogic.getAll();
+            const movies = await this.movieLogic.getAll();
+
+            if (!movies) return res.status(204).json('No prize bracket found');
+
+            const response: IMovieResponse[] = movies.map(movie => ({
+                id: movie.id,
+                year: movie.year,
+                title: movie.title,
+                studios: movie.studios,
+                producers: movie.producers,
+                winner: movie.winner
+            }));
 
             return res.status(response ? 200 : 204).json(response);
         } catch (error) {
@@ -86,7 +111,26 @@ export class MovieController {
         try {
             const response = await this.movieLogic.getPrizeBracket();
 
-            return res.status(response ? 200 : 204).json(response);
+            if (!response) {
+                return res.status(204).json('No prize bracket found');
+            }
+
+            const mappedResponse: IMoviePrizeBracketResponse = {
+                min: response.min.map(item => ({
+                    producer: item.producer,
+                    interval: item.interval,
+                    previousWin: item.previousWin,
+                    followingWin: item.followingWin
+                })),
+                max: response.max.map(item => ({
+                    producer: item.producer,
+                    interval: item.interval,
+                    previousWin: item.previousWin,
+                    followingWin: item.followingWin
+                }))
+            };
+
+            return res.status(response ? 200 : 204).json(mappedResponse);
         } catch (error) {
             return next(error);
         }
