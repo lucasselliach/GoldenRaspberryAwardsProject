@@ -90,7 +90,7 @@ export class MovieLogic implements IMovieLogic {
     }
 
     public async getPrizeBracket(): Promise<MoviePrizeBracket> {
-        const movies = await this.movieRepository.getAll();
+        const movies = await this.movieRepository.getAllSortByYear();
         
         return MoviePrizeBracket.Create(movies);
     }

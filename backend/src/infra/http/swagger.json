@@ -144,7 +144,7 @@
                 "parameters": [
                     {
                         "in": "formData",
-                        "name": "file",
+                        "name": "filecsv",
                         "description": "CSV file with movies",
                         "required": true,
                         "type": "file"

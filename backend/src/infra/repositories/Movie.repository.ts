@@ -1,14 +1,14 @@
 import { Service } from "typedi";
-import { Movie, IMovieProps } from "../../domain/movie/Movie";
+import { Movie, IMovieProperties } from "../../domain/movie/Movie";
 import { IMovieRepository } from "../../domain/movie/interfaces/IMovie.repository";
 import { Schema, model } from 'mongoose';
 
-export interface IMoviePropsMongoose extends IMovieProps {
+export interface IMoviePropertiesMongoose extends IMovieProperties {
     _id: string;
 }
 
-const movieSchema = new Schema<IMoviePropsMongoose>({
-    _id: {type: String, required: true },
+const movieSchema = new Schema<IMoviePropertiesMongoose>({
+    _id: { type: String, required: true },
     year: { type: Number, required: true },
     title: { type: String, required: true },
     studios: { type: String, required: true },
@@ -16,7 +16,7 @@ const movieSchema = new Schema<IMoviePropsMongoose>({
     winner: { type: Boolean, required: true }
 });
 
-const MovieModel = model<IMoviePropsMongoose>('Movie', movieSchema);
+const MovieModel = model<IMoviePropertiesMongoose>('Movie', movieSchema);
 
 @Service()
 export class MovieRepository implements IMovieRepository {
@@ -41,7 +41,17 @@ export class MovieRepository implements IMovieRepository {
 
     public async read(id: string): Promise<Movie | any> {
         try {
-            return await MovieModel.findById(id);
+            const movieModel = await MovieModel.findById(id);
+
+            const movie = Movie.Create({
+                year: movieModel.year,
+                title: movieModel.title,
+                studios: movieModel.studios,
+                producers: movieModel.producers,
+                winner: movieModel.winner
+            }, movieModel._id)
+
+            return movie;
         } catch (error) {
             console.log(error);
             throw error;
@@ -85,7 +95,40 @@ export class MovieRepository implements IMovieRepository {
 
     public async getAll(): Promise<Movie[]> {
         try {
-            return await MovieModel.find();
+            const moviesModel = await MovieModel.find();
+
+            const movies = moviesModel.map(movieModel =>
+                Movie.Create({
+                    year: movieModel.year,
+                    title: movieModel.title,
+                    studios: movieModel.studios,
+                    producers: movieModel.producers,
+                    winner: movieModel.winner
+                }, movieModel._id)
+            );
+
+            return movies;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
+
+    public async getAllSortByYear(): Promise<Movie[]> {
+        try {
+            const moviesModel = await MovieModel.find().sort({ year: 1 });
+
+            const movies = moviesModel.map(movieModel =>
+                Movie.Create({
+                    year: movieModel.year,
+                    title: movieModel.title,
+                    studios: movieModel.studios,
+                    producers: movieModel.producers,
+                    winner: movieModel.winner
+                }, movieModel._id)
+            );
+
+            return movies;
         } catch (error) {
             console.log(error);
             throw error;

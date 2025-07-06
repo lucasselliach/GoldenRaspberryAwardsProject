@@ -1,6 +1,6 @@
 import { Entity } from "../core/Entity";
 
-export interface IMovieProps {
+export interface IMovieProperties {
     year: number;
     title: string;
     studios: string;
@@ -8,34 +8,34 @@ export interface IMovieProps {
     winner: boolean;
 }
 
-export class Movie extends Entity<IMovieProps> {
+export class Movie extends Entity<IMovieProperties> {
     get year(): number {
-        return this.props.year;
+        return this.properties.year;
     }
 
     get title(): string {
-        return this.props.title;
+        return this.properties.title;
     }
 
     get studios(): string {
-        return this.props.studios;
+        return this.properties.studios;
     }
 
     get producers(): string {
-        return this.props.producers;
+        return this.properties.producers;
     }
 
     get winner(): boolean {
-        return this.props.winner;
+        return this.properties.winner;
     }
 
-    private constructor(props: IMovieProps, id?: string) {
-        super(props, id);
+    private constructor(properties: IMovieProperties, id?: string) {
+        super(properties, id);
     }
     
-    public static Create(props: IMovieProps, id?: string): Movie {
+    public static Create(properties: IMovieProperties, id?: string): Movie {
         const entity = new Movie({
-            ...props
+            ...properties
         }, id);
 
         return entity;

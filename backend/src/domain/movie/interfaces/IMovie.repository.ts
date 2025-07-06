@@ -8,4 +8,5 @@ export interface IMovieRepository {
     exists(id: string): Promise<boolean>;
 
     getAll(): Promise<Movie[]>;
+    getAllSortByYear(): Promise<Movie[]>;
 }
