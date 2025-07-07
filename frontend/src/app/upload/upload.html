@@ -1,1 +1,17 @@
-<p>upload works!</p>
+<div class="container-fluid">
+    <div class="container mt-4">
+        <h2>Upload Movie File</h2>
+        <form (submit)="onUpload($event)">
+            <div class="mb-3">
+                <input type="file" (change)="onFileSelected($event)" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="!selectedFile">Upload</button>
+        </form>
+        <div *ngIf="uploadSuccess" class="alert alert-success mt-3">
+            Upload feito!
+        </div>
+        <div *ngIf="uploadError" class="alert alert-danger mt-3">
+            Upload failed!
+        </div>
+    </div>
+</div>

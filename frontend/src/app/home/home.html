@@ -1,3 +1,103 @@
-<p>home works!</p>
+
+<div class="container-fluid text-left">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Retorno de MIN e MAX conforme solicitado na tarefa de backend:</h3>
+                </div>
+                <div class="card-body">
+                    <pre><code>{{prizeBracket | json }}</code></pre>
+                </div>
+            </div>
+        </div>
+   
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Lista de Filmes</h3>
+                </div>
+                <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Titulo</th>
+                                    <th scope="col">Ano</th>
+                                    <th scope="col">Estudio</th>
+                                    <th scope="col">Produtores</th>
+                                    <th scope="col">Venceu?</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let movie of movies">
+                                    <td>{{ movie.title }}</td>
+                                    <td>{{ movie.year }}</td>
+                                    <td>{{ movie.studios }}</td>
+                                    <td>{{ movie.producers }}</td>
+                                    <td>{{ movie.winner ? 'Sim' : 'Não' }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="d-flex justify-content-between p-2">
+                            <ngb-pagination
+                                [collectionSize]="collectionSize"
+                                [(page)]="page"
+                                [pageSize]="pageSize"
+                                (pageChange)="refresh()"
+                            ></ngb-pagination>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Lista de anos com ganhadores</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Ano</th>
+                                <th scope="col">Ganhadores</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let year of allYearsWithMoreThanOnewinner">
+                                <td>{{ year.year }}</td>
+                                <td>{{ year.winnerQty | number }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
 
+        <div class="col col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Lista de filmes feito por ano</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Ano</th>
+                                <th scope="col">filmes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let year of allMoviesByYearQty">
+                                <td>{{ year.year }}</td>
+                                <td>{{ year.movies | number }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+  </div>
+</div>
