@@ -12,6 +12,10 @@ import { Create } from './movies/create/create';
 import { Edit } from './movies/edit/edit';
 import { Delete } from './movies/delete/delete';
 
+import { CommonModule } from '@angular/common';
+import { provideHttpClient } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     App,
@@ -26,11 +30,15 @@ import { Delete } from './movies/delete/delete';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    CommonModule,
+    FormsModule, 
+    ReactiveFormsModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideZonelessChangeDetection()
+    provideZonelessChangeDetection(),
+    provideHttpClient(),
   ],
   bootstrap: [App]
 })
