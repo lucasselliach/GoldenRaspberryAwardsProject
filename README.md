@@ -18,7 +18,11 @@
 
 4. **Acesse as aplicações:**
    - **Frontend:** [http://localhost:4200](http://localhost:4200)
-   - **Backend:** [http://localhost:8080](http://localhost:8080)
+   - **Backend:** [http://localhost:8080/api-docs](http://localhost:8080/api-docs)
+   - **Mongo-express:** [http://localhost:8081](http://localhost:8081)
+
+      USERNAME: app
+      PASSWORD: MongoExpress2025!
 
 5. **Para parar o projeto**
    ```sh
