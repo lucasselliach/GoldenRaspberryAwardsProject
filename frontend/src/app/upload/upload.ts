@@ -31,6 +31,12 @@ export class Upload {
   async onUpload(event: Event) {
     event.preventDefault();
     if (!this.selectedFile) return;
+    if (this.selectedFile.type !== 'text/csv') {
+      this.uploadError = true;
+      this.uploadSuccess = false;
+      this.cdr.detectChanges();
+      return;
+    }
     try {
       await this.service.uploadFile(this.selectedFile);
       this.uploadSuccess = true;

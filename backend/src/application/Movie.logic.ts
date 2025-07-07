@@ -92,6 +92,10 @@ export class MovieLogic implements IMovieLogic {
     public async getPrizeBracket(): Promise<MoviePrizeBracket> {
         const movies = await this.movieRepository.getAllSortByYear();
         
+        if (movies.length === 0) {
+            throw new DomainError('Nenhum filme encontrado para criar o bracket.');
+        }
+        
         return MoviePrizeBracket.Create(movies);
     }
 }

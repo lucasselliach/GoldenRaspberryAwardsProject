@@ -6,7 +6,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "127.0.0.1:4200:4200"
+      - "4200:4200"
     environment:
       - NODE_ENV=development
     networks:
