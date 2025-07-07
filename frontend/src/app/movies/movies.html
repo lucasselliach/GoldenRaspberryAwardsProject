@@ -1,0 +1,38 @@
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">Title</th>
+			<th scope="col">Year</th>
+			<th scope="col">Studios</th>
+			<th scope="col">Producers</th>
+			<th scope="col">Winner</th>
+		</tr>
+	</thead>
+	<tbody>
+        <tr *ngFor="let movie of movies">
+            <td>{{ movie.id }}</td>
+            <td>{{ movie.title }}</td>
+            <td>{{ movie.year }}</td>
+            <td>{{ movie.studios }}</td>
+            <td>{{ movie.producers }}</td>
+            <td>{{ movie.winner ? 'Yes' : 'No' }}</td>
+        </tr>
+	</tbody>
+</table>
+
+<div class="d-flex justify-content-between p-2">
+	<ngb-pagination
+		[collectionSize]="collectionSize"
+		[(page)]="page"
+		[pageSize]="pageSize"
+		(pageChange)="refresh()"
+	>
+	</ngb-pagination>
+
+	<!-- <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refresh()">
+		<option [ngValue]="2">2 items per page</option>
+		<option [ngValue]="4">4 items per page</option>
+		<option [ngValue]="6">6 items per page</option>
+	</select> -->
+</div>

@@ -1,0 +1,29 @@
+<div class="sidebar" [ngClass]="{ 'expanded': isExpanded }">
+  <div class="header">
+    <h1 class="title">
+      GOLDENRY
+    </h1>
+    <div class="toggle" (click)="handleSidebarToggle()">
+      <span class="chevron"></span>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="link">
+      <div class="content" [routerLink]="['/home']" [routerLinkActive]="'active'">
+        <div class="title">Home</div>
+      </div>
+    </div>
+    <div class="link">
+      <div class="content" [routerLink]="['/movies']" [routerLinkActive]="'active'">
+        <div class="title">Filmes</div>
+      </div>
+    </div>
+    <div class="link">
+      <div class="content" [routerLink]="['/upload']" [routerLinkActive]="'active'">
+        <div class="title">Upload</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"></div>
+</div>
