@@ -6,7 +6,8 @@ import { IMovieLogic } from "../domain/movie/interfaces/IMovie.logic";
 import { IMovieValidation } from "../domain/movie/interfaces/IMovie.validation";
 import { IMovieRepository } from "../domain/movie/interfaces/IMovie.repository";
 import { MovieValidation } from "../domain/movie/validation/Movie.validation";
-import { MovieRepository } from "../infra/repositories/Movie.repository";
+// import { MovieRepository } from "../infra/repositories/MovieMongo.repository";
+import { MovieRepository } from "../infra/repositories/MovieSqlite.repository";
 import { DomainError } from "../infra/core/DomainError";
 
 import fs from 'fs';
