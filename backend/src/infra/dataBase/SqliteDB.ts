@@ -29,6 +29,17 @@ export class DatabaseConfig {
         `);
         console.log('Database successfully initialized!');
     }
+
+    static Import(db: DatabaseSync, movies: Array<{ id: string, year: number, title: string, studios: string, producers: string, winner: number }> ): void {
+        console.log('Importing data into Database');
+
+        for (const movie of movies) {
+            db.prepare('INSERT INTO movies (id, year, title, studios, producers, winner) VALUES (?, ?, ?, ?, ?, ?)')
+                .run(movie.id, movie.year, movie.title, movie.studios, movie.producers, movie.winner);
+        }
+        
+        console.log('Data successfully imported into Database');
+    }
 }
 
 @Service()

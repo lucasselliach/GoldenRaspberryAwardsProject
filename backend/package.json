@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "main": "dist/index.js",
   "scripts": {
+    "build": "tsc",
+    "postbuild": "cp ./src/infra/assets/Movielist.csv ./dist/Movielist.csv",
     "start": "tsc && node dist/index.js",
     "lint": "eslint . --ext .ts",
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -30,4 +30,4 @@
    ```
 
 **Nota:**  
-Para massa de dados utiliza-se: Movielist.csv
+Para massa de dados utiliza-se: Movielist.csv que se encontra em backend/infra/assets. Caso queira somente roda o backend, precisa fazer um npm run build primeiro para o arquivo ser copiado para dentro do dist. Depois npm start, e o sistema fará o auto import. 
