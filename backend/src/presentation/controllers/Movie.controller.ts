@@ -17,9 +17,9 @@ export class MovieController {
     public async create(req: Request, res: Response, next: NextFunction) {
         try {
             const body = req.body
-            await this.movieLogic.create(body.year, body.title, body.studios, body.producers, body.winner);
+            const movie = await this.movieLogic.create(body.year, body.title, body.studios, body.producers, body.winner);
 
-            return res.status(201).json('ok');
+            return res.status(201).json('Movie id: ' + movie.id);
         } catch (error) {
             return next(error);
         }

@@ -30,4 +30,9 @@
    ```
 
 **Nota:**  
-Para massa de dados utiliza-se: Movielist.csv que se encontra em backend/infra/assets. Caso queira somente roda o backend, precisa fazer um npm run build primeiro para o arquivo ser copiado para dentro do dist. Depois npm start, e o sistema fará o auto import. 
+
+Node version utilizada: 22.17.1
+
+1 - Para massa de dados utiliza-se: Movielist.csv que se encontra em backend/infra/assets. Caso queira somente roda o backend, precisa fazer um npm run build primeiro para o arquivo ser copiado para dentro do dist. Depois npm start, e o sistema fará o auto import. 
+
+2 - Para testes backend, entre na pasta backend e rode um npm run build e npm run test.

@@ -22,7 +22,7 @@ export class MovieLogic implements IMovieLogic {
         this.movieRepository = movieRepository;
     }
 
-    public async create(year: number, title: string, studios: string, producers: string, winner: boolean): Promise<void> {
+    public async create(year: number, title: string, studios: string, producers: string, winner: boolean): Promise<Movie> {
         const movie: Movie = Movie.Create({
             year: year,
             title: title,
@@ -33,6 +33,8 @@ export class MovieLogic implements IMovieLogic {
 
         if(this.movieValidation.isValid(movie)){
             await this.movieRepository.create(movie);
+
+            return movie;
         }else{
             throw new DomainError('Filme não é valido');
         }
