@@ -113,7 +113,7 @@ export class MoviePrizeBracket extends ValueObject<IMoviePrizeBracketProperties>
                     followingWin: producerFilter.followingWin
                 });
 
-                valueObject.min.push(firstMinProducer);
+                valueObject.max.push(firstMinProducer);
             }
         });
 
