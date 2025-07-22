@@ -137,36 +137,98 @@
             </div>
         </div>
 
-
-
         <div class="col">
             <div class="card">
                 <div class="card-header">
                     <h3>List movie winners by year</h3>
                 </div>
                 <div class="card-body">
+                        <form class="row" (ngSubmit)="searchByYear()">
+                            <div class="input-group">
+                            <div class="col-11">
+                                <input type="text" class="form-control" list="datalistOptions" id="search01" placeholder="Search by year" [(ngModel)]="yearToSelect" name="yearToSelect" required>
+                                <datalist id="datalistOptions">
+                                    <option value="1990">
+                                    <option value="1991">
+                                    <option value="1992">
+                                    <option value="1993">
+                                    <option value="1994">
+                                    <option value="1995">
+                                    <option value="1996">
+                                    <option value="1997">
+                                    <option value="1998">
+                                    <option value="1999">
+                                    <option value="2000">
+                                </datalist>
+                            </div>
+                            <div class="col-1">
+                                <button type="submit" class="btn btn-primary mb-3">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        </form>
+                        <!-- <h5 class="card-title text-center text-info">Adicionar filme</h5>
+                            <form class="row g-3">
+                                <div class="mb-3">
+                                    <label for="title" class="form-label">Titulo</label>
+                                    <input type="text" class="form-control" id="title" [formControl]="title" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="year" class="form-label">Ano</label>
+                                    <input type="text" class="form-control" id="year" [formControl]="year" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="studios" class="form-label">Estudio</label>
+                                    <input id="studios" name="studios" class="form-control" [formControl]="studios"
+                                        required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="producers" class="form-label">Produtores</label>
+                                    <input id="producers" name="producers" class="form-control"
+                                        [formControl]="producers" required>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input id="winner" name="winner" type="checkbox" class="form-check-input"
+                                        [formControl]="winner">
+                                    <label for="winner" class="form-check-label">Foi vencedor?</label>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                                        <button type="submit" (click)="resetControls()"
+                                            class="btn btn-primary btn-sm">Limpar</button>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                                        <button type="submit" (click)="submit()"
+                                            class="btn btn-primary btn-sm">Adicionar</button>
+                                    </div>
+                                </div>
+                            </form> -->
 
 
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">Titulo</th>
-                                <th scope="col">Ano</th>
-                                <th scope="col">Estudio</th>
-                                <th scope="col">Produtores</th>
-                                <th scope="col">Venceu?</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let movie of yearWinnersMovies">
-                                <td>{{ movie.title }}</td>
-                                <td>{{ movie.year }}</td>
-                                <td>{{ movie.studios }}</td>
-                                <td>{{ movie.producers }}</td>
-                                <td>{{ movie.winner ? 'Sim' : 'Não' }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="row">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Titulo</th>
+                                    <th scope="col">Ano</th>
+                                    <th scope="col">Estudio</th>
+                                    <th scope="col">Produtores</th>
+                                    <th scope="col">Venceu?</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let movie of yearWinnersMovies">
+                                    <td>{{ movie.title }}</td>
+                                    <td>{{ movie.year }}</td>
+                                    <td>{{ movie.studios }}</td>
+                                    <td>{{ movie.producers }}</td>
+                                    <td>{{ movie.winner ? 'Sim' : 'Não' }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

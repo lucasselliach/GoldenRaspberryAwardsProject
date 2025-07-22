@@ -139,7 +139,7 @@ export class Home implements OnInit {
       //   producers: movie.producers.join(', '),
       //   winner: movie.winner
       // })) || [];     
-      
+
 
     } catch (error) {
       console.error('Error on refresh:', error);
@@ -149,5 +149,18 @@ export class Home implements OnInit {
 
   async onPageChange() {
     this.moviesRefresh();
+  }
+
+  async searchByYear() {
+    const winnersByYearResponse = await this.serviceOutsera.getWinnersByYear(this.yearToSelect);
+    this.yearWinnersMovies = winnersByYearResponse.map((movie: any) => ({
+      id: movie.id.toString(),
+      year: movie.year,
+      title: movie.title,
+      studios: movie.studios.join(', '),
+      producers: movie.producers.join(', '),
+      winner: movie.winner
+    })) || [];
+    this.cdr.detectChanges();
   }
 }
