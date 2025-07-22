@@ -22,7 +22,9 @@ export class MoviesOutsera implements OnInit {
   pageSize = 10;
   collectionSize = 0;
   movies: Movie[] = [];
-  allMovies: Movie[] = [];
+
+  filterYear?: number;
+  filterWinner?: boolean;
 
   private service = inject(Service);
   private cdr = inject(ChangeDetectorRef);
@@ -35,7 +37,7 @@ export class MoviesOutsera implements OnInit {
 
   async refresh() {
     try {
-      const outseraMovies: OutseraMoviesResponse = await this.service.getOutseraMovies(this.page - 1, this.pageSize);
+      const outseraMovies: OutseraMoviesResponse = await this.service.getOutseraMovies(this.page - 1, this.pageSize, this.filterWinner, this.filterYear);
       console.log('Outsera Movies:', outseraMovies);
 
       this.movies = outseraMovies.content.map((movie: any) => ({
@@ -53,5 +55,13 @@ export class MoviesOutsera implements OnInit {
       console.error('Error on refresh:', error);
     }
     this.cdr.detectChanges();
+  }
+
+  async onYearFilterChange() {
+    await this.refresh();
+  }
+
+  async onWinnerFilterChange() {
+    await this.refresh();
   }
 }

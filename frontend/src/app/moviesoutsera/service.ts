@@ -14,13 +14,18 @@ export class Service {
   constructor() { }
 
   async getOutseraMovies(page: number, size: number, winner?: boolean, year?: number): Promise<OutseraMoviesResponse> {
-    const params = new HttpParams()
+    let params = new HttpParams()
       .set('page', page)
       .set('size', size)
 
-      winner !== undefined ? params.set('winner', winner.toString()) : params
-      year !== undefined ? params.set('year', year.toString()) : params;
+    if (winner !== undefined) {
+      params = params.set('winner', winner.toString());
+    }
 
+    if (year !== undefined && year !== 0) {
+      params = params.set('year', year.toString());
+    }
+    
     return await firstValueFrom(
       this.http.get<any>('https://challenge.outsera.tech/api/movies', { params })
     );

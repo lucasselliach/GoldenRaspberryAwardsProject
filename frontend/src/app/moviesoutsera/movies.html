@@ -1,20 +1,31 @@
-
 <div class="container-fluid text-left">
     <div class="row">
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <h3>Lista de Filmes</h3>
+                    <h3>Movies list</h3>
                 </div>
                 <div class="card-body">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">Titulo</th>
-                                <th scope="col">Ano</th>
-                                <th scope="col">Estudio</th>
-                                <th scope="col">Produtores</th>
-                                <th scope="col">Venceu?</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">
+                                    Year
+                                    <input type="number" class="form-control form-control-sm mt-1" style="width: 80px;"
+                                        [(ngModel)]="filterYear" (ngModelChange)="onYearFilterChange()"
+                                        placeholder="Filtrar" />
+                                </th>
+                                <th scope="col">Studios</th>
+                                <th scope="col">Producers</th>
+                                <th scope="col">Winner?
+                                    <select class="form-select form-select-sm mt-1" style="width: 80px;"
+                                        [(ngModel)]="filterWinner" (ngModelChange)="onWinnerFilterChange()">
+                                        <option [ngValue]="undefined">All</option>
+                                        <option [ngValue]="true">Yes</option>
+                                        <option [ngValue]="false">No</option>
+                                    </select>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -23,22 +34,18 @@
                                 <td>{{ movie.year }}</td>
                                 <td>{{ movie.studios }}</td>
                                 <td>{{ movie.producers }}</td>
-                                <td>{{ movie.winner ? 'Sim' : 'Não' }}</td>
+                                <td>{{ movie.winner ? 'Yes' : 'No' }}</td>
                             </tr>
                         </tbody>
                     </table>
 
                     <div class="d-flex justify-content-between p-2">
-                        <ngb-pagination
-                            [(page)]="page"
-                            [pageSize]="pageSize"
-                            [collectionSize]="collectionSize"
-                            (pageChange)="refresh()"
-                        ></ngb-pagination>
+                        <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="collectionSize"
+                            (pageChange)="refresh()"></ngb-pagination>
                     </div>
                 </div>
             </div>
         </div>
 
-  </div>
+    </div>
 </div>
