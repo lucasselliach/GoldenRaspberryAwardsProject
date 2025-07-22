@@ -11,6 +11,7 @@ import { Upload } from './upload/upload';
 import { Create } from './movies/create/create';
 import { Edit } from './movies/edit/edit';
 import { Delete } from './movies/delete/delete';
+import { MoviesOutsera } from './moviesoutsera/movies';
 
 import { CommonModule } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
@@ -25,7 +26,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     Upload,
     Create,
     Edit,
-    Delete
+    Delete,
+    MoviesOutsera
   ],
   imports: [
     BrowserModule,

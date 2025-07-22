@@ -6,6 +6,7 @@ import { Upload } from './upload/upload';
 import { Create } from './movies/create/create';
 import { Edit } from './movies/edit/edit';
 import { Delete } from './movies/delete/delete';
+import { MoviesOutsera } from './moviesoutsera/movies';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'upload',
     component: Upload
+  },
+  {
+    path: 'moviesoutsera',
+    component: MoviesOutsera
   }
 ];
 
