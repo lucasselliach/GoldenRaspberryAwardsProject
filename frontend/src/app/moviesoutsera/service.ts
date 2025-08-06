@@ -22,7 +22,7 @@ export class Service {
       params = params.set('winner', winner.toString());
     }
 
-    if (year !== undefined && year !== 0) {
+    if (year !== undefined && year !== null && year !== 0) {
       params = params.set('year', year.toString());
     }
     

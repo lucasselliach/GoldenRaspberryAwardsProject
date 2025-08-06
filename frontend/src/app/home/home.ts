@@ -54,6 +54,7 @@ export class Home implements OnInit {
 
   yearToSelect: number = 1990;
   yearWinnersMovies: Movie[] = [];
+  yearSearchError: string = '';
 
   constructor() { }
 
@@ -152,6 +153,18 @@ export class Home implements OnInit {
   }
 
   async searchByYear() {
+    this.yearSearchError = '';
+
+    if (!this.yearToSelect || this.yearToSelect.toString().trim() === '') {
+      this.yearSearchError = 'Por favor, insira um ano válido';
+      return;
+    }
+    
+    if (this.yearToSelect < 1900 || this.yearToSelect > new Date().getFullYear()) {
+      this.yearSearchError = 'Por favor, insira um ano válido entre 1900 e o ano atual';
+      return;
+    }
+    
     const winnersByYearResponse = await this.serviceOutsera.getWinnersByYear(this.yearToSelect);
     this.yearWinnersMovies = winnersByYearResponse.map((movie: any) => ({
       id: movie.id.toString(),

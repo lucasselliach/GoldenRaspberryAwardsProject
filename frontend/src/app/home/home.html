@@ -43,14 +43,14 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <h3>List years with multiple winners</h3>
+                    <h3>Lista de anos com múltiplos vencedores</h3>
                 </div>
                 <div class="card-body">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">Years</th>
-                                <th scope="col">Winners</th>
+                                <th scope="col">Anos</th>
+                                <th scope="col">Vencedores</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -67,14 +67,14 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <h3>Top 3 studios with winners</h3>
+                    <h3>Top 3 estudios com vencedores</h3>
                 </div>
                 <div class="card-body">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Win Count</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Contagem de Vitórias</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -92,16 +92,16 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <h3>Producers with longest and shortest interval between wins</h3>
+                    <h3>Produtores com o maior e menor intervalo entre vitórias</h3>
                 </div>
                 <div class="card-body">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">Producer</th>
-                                <th scope="col">Interval</th>
-                                <th scope="col">PreviousWin</th>
-                                <th scope="col">FollowingWin</th>
+                                <th scope="col">Produtor</th>
+                                <th scope="col">Intervalo</th>
+                                <th scope="col">Vitória Anterior</th>
+                                <th scope="col">Vitória Seguinte</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -117,10 +117,10 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">Producer</th>
-                                <th scope="col">Interval</th>
-                                <th scope="col">PreviousWin</th>
-                                <th scope="col">FollowingWin</th>
+                                <th scope="col">Produtor</th>
+                                <th scope="col">Intervalo</th>
+                                <th scope="col">Vitória Anterior</th>
+                                <th scope="col">Vitória Seguinte</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -140,13 +140,13 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <h3>List movie winners by year</h3>
+                    <h3>Lista de filmes vencedores por ano</h3>
                 </div>
                 <div class="card-body">
-                        <form class="row" (ngSubmit)="searchByYear()">
-                            <div class="input-group">
+                    <form class="row needs-validation" (ngSubmit)="searchByYear()" novalidate>
+                        <div class="input-group">
                             <div class="col-11">
-                                <input type="text" class="form-control" list="datalistOptions" id="search01" placeholder="Search by year" [(ngModel)]="yearToSelect" name="yearToSelect" required>
+                                <input type="text" class="form-control" [class.is-invalid]="yearSearchError" list="datalistOptions" id="search01" placeholder="Search by year" [(ngModel)]="yearToSelect" name="yearToSelect" required>
                                 <datalist id="datalistOptions">
                                     <option value="1990">
                                     <option value="1991">
@@ -160,6 +160,9 @@
                                     <option value="1999">
                                     <option value="2000">
                                 </datalist>
+                                <div *ngIf="yearSearchError" class="invalid-feedback">
+                                    {{ yearSearchError }}
+                                </div>
                             </div>
                             <div class="col-1">
                                 <button type="submit" class="btn btn-primary mb-3">
@@ -167,47 +170,8 @@
                                 </button>
                             </div>
                         </div>
-                        </form>
-                        <!-- <h5 class="card-title text-center text-info">Adicionar filme</h5>
-                            <form class="row g-3">
-                                <div class="mb-3">
-                                    <label for="title" class="form-label">Titulo</label>
-                                    <input type="text" class="form-control" id="title" [formControl]="title" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="year" class="form-label">Ano</label>
-                                    <input type="text" class="form-control" id="year" [formControl]="year" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="studios" class="form-label">Estudio</label>
-                                    <input id="studios" name="studios" class="form-control" [formControl]="studios"
-                                        required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="producers" class="form-label">Produtores</label>
-                                    <input id="producers" name="producers" class="form-control"
-                                        [formControl]="producers" required>
-                                </div>
-                                <div class="mb-3 form-check">
-                                    <input id="winner" name="winner" type="checkbox" class="form-check-input"
-                                        [formControl]="winner">
-                                    <label for="winner" class="form-check-label">Foi vencedor?</label>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-                                        <button type="submit" (click)="resetControls()"
-                                            class="btn btn-primary btn-sm">Limpar</button>
-                                    </div>
-                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-                                        <button type="submit" (click)="submit()"
-                                            class="btn btn-primary btn-sm">Adicionar</button>
-                                    </div>
-                                </div>
-                            </form> -->
-
-
-                    <div class="row">
+                    </form>
+                    <div class="row" *ngIf="yearWinnersMovies && yearWinnersMovies.length > 0">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -229,6 +193,8 @@
                             </tbody>
                         </table>
                     </div>
+                    <div *ngIf="yearWinnersMovies && yearWinnersMovies.length === 0" class="alert alert-info" role="alert">
+                        Nenhum filme vencedor encontrado para o ano {{ yearToSelect }}.
                 </div>
             </div>
         </div>

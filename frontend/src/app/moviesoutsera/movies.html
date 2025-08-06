@@ -3,27 +3,27 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <h3>Movies list</h3>
+                    <h3>Lista de Filmes</h3>
                 </div>
                 <div class="card-body">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">Title</th>
+                                <th scope="col">Título</th>
                                 <th scope="col">
-                                    Year
-                                    <input type="number" class="form-control form-control-sm mt-1" style="width: 80px;"
+                                    Ano
+                                    <input type="number" class="form-control form-control-sm mt-1" style="width: 100px;"
                                         [(ngModel)]="filterYear" (ngModelChange)="onYearFilterChange()"
                                         placeholder="Filtrar" />
                                 </th>
-                                <th scope="col">Studios</th>
-                                <th scope="col">Producers</th>
-                                <th scope="col">Winner?
-                                    <select class="form-select form-select-sm mt-1" style="width: 80px;"
+                                <th scope="col">Estúdios</th>
+                                <th scope="col">Produtores</th>
+                                <th scope="col">Vencedor?
+                                    <select class="form-select form-select-sm mt-1" style="width: 100px;"
                                         [(ngModel)]="filterWinner" (ngModelChange)="onWinnerFilterChange()">
-                                        <option [ngValue]="undefined">All</option>
-                                        <option [ngValue]="true">Yes</option>
-                                        <option [ngValue]="false">No</option>
+                                        <option [ngValue]="undefined">Todos</option>
+                                        <option [ngValue]="true">Sim</option>
+                                        <option [ngValue]="false">Não</option>
                                     </select>
                                 </th>
                             </tr>
