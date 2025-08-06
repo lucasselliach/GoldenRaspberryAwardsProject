@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms'; // Add this import
 import { MoviesOutsera } from './movies';
 
 describe('Movies', () => {
@@ -10,8 +13,13 @@ describe('Movies', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [MoviesOutsera],
+      imports: [
+        NgbModule,
+        FormsModule
+      ],
       providers: [
         provideZonelessChangeDetection(),
+        provideHttpClient(),
         provideHttpClientTesting()
       ]
     })
