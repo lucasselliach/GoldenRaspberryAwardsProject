@@ -23,4 +23,9 @@ describe('Sidebar', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should initialize with default values', () => {
+    expect(component.isExpanded).toBe(false);
+    expect(component.toggleSidebar).toBeDefined();
+  });
 });
